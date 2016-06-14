@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VoiceAnimator">
+        <attr name="dotsCount" format="integer"/>
+        <attr name="colorList" format="reference"/>
+        <attr name="dotsMaxHeight" format="reference"/>
+        <attr name="dotsMinHeight" format="dimension"/>
+        <attr name="dotsWidth" format="dimension"/>
+        <attr name="dotsMargin" format="dimension"/>
+        <attr name="backGroundColor" format="reference"/>
+        <attr name="animationMode" >
+            <enum name="stable_max" value="0"/>
+            <enum name="stable_min" value="1"/>
+            <enum name="stable_half" value="2"/>
+            <enum name="animation" value="3"/>
+        </attr>
+
+    </declare-styleable>
+
+
+
+</resources>

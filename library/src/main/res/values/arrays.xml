@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="dotsColors">
+        <item name="first">@color/voice_dots_blue</item>
+        <item name="second">@color/voice_dots_orange</item>
+        <item name="third">@color/voice_dots_green</item>
+        <item name="fourth">@color/voice_dots_purple</item>
+    </integer-array>
+
+    <integer-array name="dotsMaxHeight">
+        <item>@dimen/height_22dp</item>
+        <item>@dimen/height_36dp</item>
+        <item>@dimen/height_16dp</item>
+        <item>@dimen/height_25dp</item>
+    </integer-array>
+
+
+    <integer-array name="dotsColors6">
+        <item name="first">@color/voice_dots_blue</item>
+        <item name="second">@color/voice_dots_orange</item>
+        <item name="third">@color/voice_dots_green</item>
+        <item name="fourth">@color/voice_dots_purple</item>
+        <item name="third">@color/voice_dots_green</item>
+        <item name="fourth">@color/voice_dots_purple</item>
+    </integer-array>
+    <integer-array name="dotsMaxHeight6">
+        <item>@dimen/height_22dp</item>
+        <item>@dimen/height_36dp</item>
+        <item>@dimen/height_16dp</item>
+        <item>@dimen/height_25dp</item>
+        <item>@dimen/height_16dp</item>
+        <item>@dimen/height_25dp</item>
+    </integer-array>
+</resources>

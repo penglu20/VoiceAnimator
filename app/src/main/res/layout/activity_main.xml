@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+    <Button
+        android:id="@+id/start_25_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="25ms*100" />
+    <Button
+        android:id="@+id/start_50_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_25_100"
+        android:text="50ms*100" />
+    <Button
+        android:id="@+id/start_100_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_50_100"
+        android:text="100ms*100" />
+    <Button
+        android:id="@+id/start_300_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_100_100"
+        android:text="300ms*100" />
+    <Button
+        android:id="@+id/start_500_100"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/start_300_100"
+        android:layout_height="wrap_content"
+        android:text="500ms*100" />
+
+    <Button
+        android:id="@+id/start_loading_12"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/start_500_100"
+        android:layout_height="wrap_content"
+        android:text="loading_12px" />
+    <Button
+        android:id="@+id/start_loading_24"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/start_loading_12"
+        android:layout_height="wrap_content"
+        android:text="loading_24px" />
+    <Button
+        android:id="@+id/start_loading_36"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/start_loading_24"
+        android:layout_height="wrap_content"
+        android:text="loading_36px" />
+
+    <Button
+        android:id="@+id/start_loading_default"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/start_loading_36"
+        android:layout_height="wrap_content"
+        android:text="loading_6dp" />
+    <TextView
+        android:id="@+id/ints"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.pl.voiceAnimation.VoiceAnimator
+        android:id="@+id/voiceAnimator"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        app:colorList="@array/dotsColors"
+        app:animationMode="animation"
+        android:layout_margin="20dp"
+        app:dotsCount="4"
+        app:dotsMaxHeight="@array/dotsMaxHeight"
+        app:backGroundColor="@color/voice_dots_background"
+        app:dotsMargin="6dp"
+        app:dotsMinHeight="8dp"
+        app:dotsWidth="6dp" />
+
+    <com.pl.voiceAnimation.VoiceAnimator
+        android:id="@+id/voiceAnimator_1"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_toRightOf="@id/voiceAnimator"
+        app:colorList="@array/dotsColors"
+        android:layout_margin="20dp"
+        app:animationMode="stable_half"
+        app:dotsCount="4"
+        app:dotsMaxHeight="@array/dotsMaxHeight"
+        app:backGroundColor="@color/voice_dots_background"
+        app:dotsMargin="6dp"
+        app:dotsMinHeight="8dp"
+        app:dotsWidth="6dp" />
+
+    <com.pl.voiceAnimation.VoiceAnimator
+        android:id="@+id/voiceAnimator_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_toLeftOf="@id/voiceAnimator"
+        android:layout_margin="20dp"
+        app:colorList="@array/dotsColors"
+        app:animationMode="stable_min"
+        app:dotsCount="4"
+        app:dotsMaxHeight="@array/dotsMaxHeight"
+        app:backGroundColor="@color/voice_dots_background"
+        app:dotsMargin="6dp"
+        app:dotsMinHeight="8dp"
+        app:dotsWidth="6dp" />
+</RelativeLayout>
