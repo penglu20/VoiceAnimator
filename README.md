@@ -6,7 +6,7 @@ A custom view that imitate google app's voice animation.
 
 ![录音效果，每50ms用setValue()传一个值](https://raw.githubusercontent.com/l465659833/VoiceAnimation/master/art/setValue_50.gif)
 
-![录音效果，每100ms用setValue()传一个值](https://raw.githubusercontent.com/l465659833/VoiceAnimation/master/art/setValue_50.gif)
+![录音效果，每100ms用setValue()传一个值](https://raw.githubusercontent.com/l465659833/VoiceAnimation/master/art/setValue_100.gif)
 
 ![startLoading()效果](https://raw.githubusercontent.com/l465659833/VoiceAnimation/master/art/startLoading.gif)
 
@@ -60,7 +60,8 @@ dependencies {
    
  
 ###4. void setDotsColors(int[] dotsColors);
-设置每个点的颜色
+设置每个点的颜色  
+
 dotsColors 每个点的颜色，rgb颜色，推荐使用Color.parseColor("#ff0000")获取
 
  
@@ -72,7 +73,8 @@ dotsColors 每个点的颜色，rgb颜色，推荐使用Color.parseColor("#ff000
 
  
 ###6. void setDotsMaxHeight(float[] dotsMaxHeight);
-  设置每个点的最大高度
+  设置每个点的最大高度  
+  
   dotsMaxHeight 最大高度值，单位px
 
   
@@ -84,7 +86,8 @@ dotsColors 每个点的颜色，rgb颜色，推荐使用Color.parseColor("#ff000
 
  
 ###8. void setDotsMinHeight(float dotsMinHeight);
-  设置点的最小高度
+  设置点的最小高度  
+  
    dotsMinHeight 最小高度值，单位px
 
 
@@ -96,7 +99,8 @@ dotsColors 每个点的颜色，rgb颜色，推荐使用Color.parseColor("#ff000
 
  
 ###10. void setDotsWidth(float dotsWidth);
-  设置每个点的宽度
+  设置每个点的宽度  
+  
    dotsWidth 宽度值，单位px
 
 
@@ -107,7 +111,8 @@ dotsColors 每个点的颜色，rgb颜色，推荐使用Color.parseColor("#ff000
 
  
 ###12. void setDotsMargin(float dotsMargin);
-  设置每个点之间的间距
+  设置每个点之间的间距  
+  
    dotsMargin 间距值，单位px
 
 
@@ -124,8 +129,10 @@ dotsColors 每个点的颜色，rgb颜色，推荐使用Color.parseColor("#ff000
 
  
 ###15. void setValue(final float targetValue);
-  **设置当前动画的幅度值**
-  **使用setValue来不断传递声音强度，让动画动起来**
+  **设置当前动画的幅度值**  
+  
+  **使用setValue来不断传递声音强度，让动画动起来**  
+  
    targetValue 动画的幅度，范围（0,1）
 
  
@@ -135,6 +142,7 @@ dotsColors 每个点的颜色，rgb颜色，推荐使用Color.parseColor("#ff000
 
  
 ###17. void startLoading(final float height); 
- 启动加载动画
+ **启动加载动画**  
+ 
    height 加载动画的幅度，单位px
 
