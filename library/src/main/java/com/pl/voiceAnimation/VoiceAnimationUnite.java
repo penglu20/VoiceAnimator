@@ -7,7 +7,7 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -80,7 +80,7 @@ public class VoiceAnimationUnite extends View {
                     sendEmptyMessage(VALUE_RESETTING);
                 case VALUE_RESETTING:
                     currentValue=lastValue-lastValue* valueDecreasingInterpolator.getInterpolation((float) changeStep/(float) RESET_VALUE_ANIMATION_MAX_FRAMES);
-                    Log.d(TAG,"handleMessage currentValue=");
+//                    Log.d(TAG,"handleMessage currentValue=");
                     setCurrentValue(currentValue);
                     invalidate();
                     changeStep++;
@@ -135,7 +135,7 @@ public class VoiceAnimationUnite extends View {
 //            int atMostWidth=MeasureSpec.getSize(widthMeasureSpec);
 //            width= (int) Math.min(width,atMostWidth);
 //        }else if (widthMode==MeasureSpec.UNSPECIFIED){
-        width= (int) (width);
+//        width= (int) (width);
 //        }
         heightMeasureSpec=MeasureSpec.makeMeasureSpec(height,heightMode);
         widthMeasureSpec=MeasureSpec.makeMeasureSpec(width,widthMode);
@@ -190,7 +190,7 @@ public class VoiceAnimationUnite extends View {
 
 
     private void setCurrentValue(float value){
-        Log.d(TAG,"setCurrentValue currentValue="+value);
+//        Log.d(TAG,"setCurrentValue currentValue="+value);
         this.currentValue =value;
     }
 
@@ -211,9 +211,9 @@ public class VoiceAnimationUnite extends View {
         if(valueHandler==null){
             return;
         }
-        Log.d(TAG,"setValueInterval="+setValueInterval);
+//        Log.d(TAG,"setValueInterval="+setValueInterval);
         if (targetValue<currentValue){
-            Log.d(TAG,"Runnable targetValue<this.targetValue");
+//            Log.d(TAG,"Runnable targetValue<this.targetValue");
         }else {
             removeResetMessages();
         }
@@ -235,20 +235,20 @@ public class VoiceAnimationUnite extends View {
                 final float lastValue=(Float.isInfinite(currentValue)||Float.isNaN(currentValue))?0:currentValue;
                 final float targetValue=VoiceAnimationUnite.this.targetValue;
 
-                Log.d(TAG,"Runnable start currentValue="+lastValue);
-                Log.d(TAG,"Runnable start targetValue="+targetValue);
+//                Log.d(TAG,"Runnable start currentValue="+lastValue);
+//                Log.d(TAG,"Runnable start targetValue="+targetValue);
                 removeResetMessages();
                 float currentValue;
                 int changeStep=0;
                 while (changeStep <= SET_VALUE_ANIMATION_MAX_FRAMES&&!isLoading) {
                     if (targetValue<lastValue){
-                        Log.d(TAG,"Runnable targetValue<this.targetValue");
+//                        Log.d(TAG,"Runnable targetValue<this.targetValue");
                     }else {
                         removeResetMessages();
                     }
                     currentValue = lastValue + (targetValue - lastValue) * valueAddingInterpolator.
                             getInterpolation((float) changeStep / (float) SET_VALUE_ANIMATION_MAX_FRAMES);
-                    Log.d(TAG,"Runnable currentValue=");
+//                    Log.d(TAG,"Runnable currentValue=");
                     setCurrentValue(currentValue);
                     drawHandler.sendEmptyMessage(VALUE_CHANGING);
                     try {
@@ -261,7 +261,7 @@ public class VoiceAnimationUnite extends View {
                     changeStep++;
                 }
                 if (targetValue<lastValue){
-                    Log.d(TAG,"Runnable targetValue<this.targetValue");
+//                    Log.d(TAG,"Runnable targetValue<this.targetValue");
                 }else {
                     removeResetMessages();
                 }

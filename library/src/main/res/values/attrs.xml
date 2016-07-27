@@ -2,12 +2,11 @@
 <resources>
     <declare-styleable name="VoiceAnimator">
         <attr name="dotsCount" format="integer"/>
-        <attr name="colorList" format="reference"/>
+        <attr name="dotColors" format="reference"/>
         <attr name="dotsMaxHeight" format="reference"/>
         <attr name="dotsMinHeight" format="dimension"/>
         <attr name="dotsWidth" format="dimension"/>
         <attr name="dotsMargin" format="dimension"/>
-        <attr name="backGroundColor" format="reference"/>
         <attr name="animationMode" >
             <enum name="stable_max" value="0"/>
             <enum name="stable_min" value="1"/>

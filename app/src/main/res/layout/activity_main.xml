@@ -11,47 +11,48 @@
         android:id="@+id/start_25_100"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="8sp"
         android:text="25ms*100" />
     <Button
         android:id="@+id/start_50_100"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/start_25_100"
+        android:textSize="8sp"
         android:text="50ms*100" />
     <Button
         android:id="@+id/start_100_100"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/start_50_100"
+        android:textSize="8sp"
         android:text="100ms*100" />
     <Button
         android:id="@+id/start_300_100"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/start_100_100"
+        android:textSize="8sp"
         android:text="300ms*100" />
-    <Button
-        android:id="@+id/start_500_100"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/start_300_100"
-        android:layout_height="wrap_content"
-        android:text="500ms*100" />
 
     <Button
         android:id="@+id/start_loading_12"
         android:layout_width="wrap_content"
-        android:layout_below="@id/start_500_100"
+        android:layout_below="@id/start_300_100"
         android:layout_height="wrap_content"
+        android:textSize="8sp"
         android:text="loading_12px" />
     <Button
         android:id="@+id/start_loading_24"
         android:layout_width="wrap_content"
         android:layout_below="@id/start_loading_12"
+        android:textSize="8sp"
         android:layout_height="wrap_content"
         android:text="loading_24px" />
     <Button
         android:id="@+id/start_loading_36"
         android:layout_width="wrap_content"
+        android:textSize="8sp"
         android:layout_below="@id/start_loading_24"
         android:layout_height="wrap_content"
         android:text="loading_36px" />
@@ -60,8 +61,16 @@
         android:id="@+id/start_loading_default"
         android:layout_width="wrap_content"
         android:layout_below="@id/start_loading_36"
+        android:textSize="8sp"
         android:layout_height="wrap_content"
         android:text="loading_6dp" />
+    <Button
+        android:id="@+id/show_setter"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/start_loading_default"
+        android:textSize="8sp"
+        android:layout_height="wrap_content"
+        android:text="show_setter_effect" />
     <TextView
         android:id="@+id/ints"
         android:layout_alignParentRight="true"
@@ -75,12 +84,12 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
-        app:colorList="@array/dotsColors"
+        app:dotColors="@array/dotsColors"
         app:animationMode="animation"
         android:layout_margin="20dp"
         app:dotsCount="4"
         app:dotsMaxHeight="@array/dotsMaxHeight"
-        app:backGroundColor="@color/voice_dots_background"
+        android:background="@drawable/circle_bg"
         app:dotsMargin="6dp"
         app:dotsMinHeight="8dp"
         app:dotsWidth="6dp" />
@@ -92,12 +101,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
         android:layout_toRightOf="@id/voiceAnimator"
-        app:colorList="@array/dotsColors"
+        app:dotColors="@array/dotsColors"
         android:layout_margin="20dp"
         app:animationMode="stable_half"
+        android:visibility="gone"
         app:dotsCount="4"
         app:dotsMaxHeight="@array/dotsMaxHeight"
-        app:backGroundColor="@color/voice_dots_background"
+        android:background="@color/voice_dots_background"
         app:dotsMargin="6dp"
         app:dotsMinHeight="8dp"
         app:dotsWidth="6dp" />
@@ -110,12 +120,13 @@
         android:layout_marginBottom="100dp"
         android:layout_toLeftOf="@id/voiceAnimator"
         android:layout_margin="20dp"
-        app:colorList="@array/dotsColors"
+        app:dotColors="@array/dotsColors"
         app:animationMode="stable_min"
         app:dotsCount="4"
         app:dotsMaxHeight="@array/dotsMaxHeight"
-        app:backGroundColor="@color/voice_dots_background"
+        android:background="@color/voice_dots_background"
         app:dotsMargin="6dp"
+        android:visibility="gone"
         app:dotsMinHeight="8dp"
         app:dotsWidth="6dp" />
 </RelativeLayout>
