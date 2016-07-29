@@ -3,8 +3,8 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 version  = "0.1"
-def siteUrl = 'https://github.com/l465659833/VoiceAnimation'                        // #CONFIG# // project homepage
-def gitUrl = 'https://github.com/l465659833/VoiceAnimation.git'                     // #CONFIG# // project git
+def siteUrl = 'https://github.com/l465659833/VoiceAnimator'                        // #CONFIG# // project homepage
+def gitUrl = 'https://github.com/l465659833/VoiceAnimator.git'                     // #CONFIG# // project git
 group = "com.pl"
 
 
@@ -38,7 +38,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'VoiceAnimation'                                   // #CONFIG# // project title
+                name 'VoiceAnimator'                                   // #CONFIG# // project title
                 url siteUrl
                 // Set your license
                 licenses {
@@ -101,7 +101,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "VoiceAnimation"                                                 // #CONFIG# project name in jcenter
+        name = "VoiceAnimator"                                                 // #CONFIG# project name in jcenter
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

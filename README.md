@@ -1,4 +1,4 @@
-# VoiceAnimation
+# VoiceAnimator
 
 A custom view that imitate google app's voice animation.
 实现仿谷歌的语音动画，效果见下图:
@@ -16,7 +16,7 @@ add to your build.gradle files:
 
 ```
 dependencies {
-    compile 'com.pl:voiceAnimation:0.1'
+    compile 'com.pl:VoiceAnimator:0.1'
 }
 ```
 
