@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
         start_300_100.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                voiceAnimator.setValueInterval(300);
                 voiceAnimator.setAnimationMode(VoiceAnimator.AnimationMode.ANIMATION);
                 new Thread(new Runnable() {
                     @Override

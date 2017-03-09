@@ -13,6 +13,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import static com.pl.voiceAnimation.VoiceAnimationUnit.SET_VALUE_ANIMATION_MAX_FRAMES;
+
 //import android.util.Log;
 
 
@@ -26,16 +28,21 @@ public class VoiceAnimator extends ViewGroup {
     private static final int VALUE_RESET=10086;
     private static final int VALUE_CHANGING=10000;
 
-    private static final int SET_VALUE_ANIMATION_FRAMES_INTERVAL=40;
-    private static final int SET_VALUE_ANIMATION_FRAMES_INTERVAL_STEP=5;
+    private static final int DEFAULT_SET_VALUE_ANIMATION_FRAMES_INTERVAL=40;//ms
+    private static final int DEFAULT_SET_VALUE_ANIMATION_FRAMES_INTERVAL_STEP=5;//ms
+
+
+    private int SET_VALUE_ANIMATION_FRAMES_INTERVAL=DEFAULT_SET_VALUE_ANIMATION_FRAMES_INTERVAL;//ms
+    private int SET_VALUE_ANIMATION_FRAMES_INTERVAL_STEP=DEFAULT_SET_VALUE_ANIMATION_FRAMES_INTERVAL_STEP;//ms
+
 
     private static final int DEFAULT_COUNT=4;
     private static final int DEFAULT_DOTSCOLOR_RES= R.array.dotsColors;
     private static final int DEFAULT_DOTS_MAX_HEIGHT_RES=R.array.dotsMaxHeight;
-    private static final float DEFAULT_DOTS_MAX_HEIGHT=100;
-    private static final float DEFAULT_DOTS_MIN_HEIGHT=20;
-    private static final float DEFAULT_DOTS_WIDTH=20;
-    private static final float DEFAULT_DOTS_MARGIN=20;
+    private static final float DEFAULT_DOTS_MAX_HEIGHT=100;//px
+    private static final float DEFAULT_DOTS_MIN_HEIGHT=20;//px
+    private static final float DEFAULT_DOTS_WIDTH=20;//px
+    private static final float DEFAULT_DOTS_MARGIN=20;//px
     private static final int DEFAULT_BACKGROUND_COLOR=0x000000;
 
     public enum AnimationMode{
@@ -56,12 +63,7 @@ public class VoiceAnimator extends ViewGroup {
     private AnimationMode animationMode=AnimationMode.ANIMATION;
 
     private float totalHeight;
-    private VoiceAnimationUnite[] VoiceAnimationUnites;
-    private int changeStep =0;
-
-
-    private long lastSetValueTime;
-    private int setValueInterval;
+    private VoiceAnimationUnit[] voiceAnimationUnits;
 
 
     private Context mContext;
@@ -169,15 +171,15 @@ public class VoiceAnimator extends ViewGroup {
 
     private void prepareDots(){
         removeAllViews();
-        VoiceAnimationUnites=new VoiceAnimationUnite[dotsCount];
+        voiceAnimationUnits =new VoiceAnimationUnit[dotsCount];
         for (int i=0;i<dotsCount;i++){
-            VoiceAnimationUnites[i]=new VoiceAnimationUnite(mContext);
-            VoiceAnimationUnites[i].width=dotsWidth;
-            VoiceAnimationUnites[i].heightMax=dotsMaxHeight[i];
-            VoiceAnimationUnites[i].heightMin=dotsMinHeight;
-            VoiceAnimationUnites[i].color=dotsColors[i];
-            VoiceAnimationUnites[i].currentY =backgroundRect.height()/2;
-            addView(VoiceAnimationUnites[i]);
+            voiceAnimationUnits[i]=new VoiceAnimationUnit(mContext);
+            voiceAnimationUnits[i].width=dotsWidth;
+            voiceAnimationUnits[i].heightMax=dotsMaxHeight[i];
+            voiceAnimationUnits[i].heightMin=dotsMinHeight;
+            voiceAnimationUnits[i].color=dotsColors[i];
+            voiceAnimationUnits[i].currentY =backgroundRect.height()/2;
+            addView(voiceAnimationUnits[i]);
         }
     }
 
@@ -207,19 +209,19 @@ public class VoiceAnimator extends ViewGroup {
 //        backgroundPaint=new Paint();
 //        backgroundPaint.setAntiAlias(true);
 //        backgroundPaint.setColor(backgroundColor);
-        for (VoiceAnimationUnite VoiceAnimationUnite:VoiceAnimationUnites){
-            VoiceAnimationUnite.preparePaint();
+        for (VoiceAnimationUnit VoiceAnimationUnit : voiceAnimationUnits){
+            VoiceAnimationUnit.preparePaint();
         }
     }
 
-    private void setCurrentValue(float value){
-        if (VoiceAnimationUnites==null){
+    private void setCurrentValue(float value,int changeStep){
+        if (voiceAnimationUnits ==null){
             return;
         }
-        if (VoiceAnimationUnites.length>changeStep) {
-            if (VoiceAnimationUnites[changeStep]!=null) {
+        if (voiceAnimationUnits.length>changeStep) {
+            if (voiceAnimationUnits[changeStep]!=null) {
                 try {
-                    VoiceAnimationUnites[changeStep].setValue(value);
+                    voiceAnimationUnits[changeStep].setValue(value);//先涨先落的关键，voiceAnimationUnit随着changeStep递增依次启动
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -227,14 +229,14 @@ public class VoiceAnimator extends ViewGroup {
         }
     }
 
-    private void setCurrentHeight(float height){
-        if (VoiceAnimationUnites==null){
+    private void setCurrentHeight(float height,int changeStep){
+        if (voiceAnimationUnits ==null){
             return;
         }
-        if (VoiceAnimationUnites.length>changeStep) {
-            if (VoiceAnimationUnites[changeStep]!=null) {
+        if (voiceAnimationUnits.length>changeStep) {
+            if (voiceAnimationUnits[changeStep]!=null) {
                 try {
-                    VoiceAnimationUnites[changeStep].setLoadingHeight(height);
+                    voiceAnimationUnits[changeStep].setLoadingHeight(height);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -243,19 +245,19 @@ public class VoiceAnimator extends ViewGroup {
     }
 
     private void setStableMax(){
-        for (VoiceAnimationUnite unit:VoiceAnimationUnites){
+        for (VoiceAnimationUnit unit: voiceAnimationUnits){
             unit.showStableMax();
         }
     }
 
     private void setStableMin(){
-        for (VoiceAnimationUnite unit:VoiceAnimationUnites){
+        for (VoiceAnimationUnit unit: voiceAnimationUnits){
             unit.showStableMin();
         }
     }
 
     private void setStableHalf(){
-        for (VoiceAnimationUnite unit:VoiceAnimationUnites){
+        for (VoiceAnimationUnit unit: voiceAnimationUnits){
             unit.showStableHalf();
         }
     }
@@ -319,7 +321,7 @@ public class VoiceAnimator extends ViewGroup {
 
     @Override
     public void onDraw(Canvas canvas) {
-        if (VoiceAnimationUnites==null){
+        if (voiceAnimationUnits ==null){
             prepareDots();
             preparePaints();
         }
@@ -354,7 +356,7 @@ public class VoiceAnimator extends ViewGroup {
      */
     public void setDotsCount(int dotsCount) {
         this.dotsCount = dotsCount;
-        VoiceAnimationUnites=null;
+        voiceAnimationUnits =null;
         requestLayout();
         postInvalidate();
     }
@@ -372,7 +374,7 @@ public class VoiceAnimator extends ViewGroup {
      */
     public void setDotsColors(int[] dotsColors) {
         this.dotsColors = dotsColors;
-        VoiceAnimationUnites=null;
+        voiceAnimationUnits =null;
         requestLayout();
         postInvalidate();
     }
@@ -391,7 +393,7 @@ public class VoiceAnimator extends ViewGroup {
      */
     public void setDotsMaxHeight(float[] dotsMaxHeight) {
         this.dotsMaxHeight = dotsMaxHeight;
-        VoiceAnimationUnites=null;
+        voiceAnimationUnits =null;
         requestLayout();
         postInvalidate();
     }
@@ -409,7 +411,7 @@ public class VoiceAnimator extends ViewGroup {
      */
     public void setDotsMinHeight(float dotsMinHeight) {
         this.dotsMinHeight = dotsMinHeight;
-        VoiceAnimationUnites=null;
+        voiceAnimationUnits =null;
         requestLayout();
         postInvalidate();
     }
@@ -428,7 +430,7 @@ public class VoiceAnimator extends ViewGroup {
      */
     public void setDotsWidth(float dotsWidth) {
         this.dotsWidth = dotsWidth;
-        VoiceAnimationUnites=null;
+        voiceAnimationUnits =null;
         requestLayout();
         postInvalidate();
     }
@@ -446,7 +448,7 @@ public class VoiceAnimator extends ViewGroup {
      */
     public void setDotsMargin(float dotsMargin) {
         this.dotsMargin = dotsMargin;
-        VoiceAnimationUnites=null;
+        voiceAnimationUnits =null;
         requestLayout();
         postInvalidate();
     }
@@ -477,39 +479,26 @@ public class VoiceAnimator extends ViewGroup {
         if (animationMode!=AnimationMode.ANIMATION){
             return;
         }
-        if (lastSetValueTime==0){
-            long now=System.currentTimeMillis();
-            setValueInterval=SET_VALUE_ANIMATION_FRAMES_INTERVAL*dotsCount;
-            lastSetValueTime=now;
-        }else {
-            long now=System.currentTimeMillis();
-            setValueInterval= (int) (now-lastSetValueTime);
-            lastSetValueTime=now;
-        }
-//        Log.d(TAG,"setValueInterval="+setValueInterval);
-
-//        drawHandler.sendEmptyMessage(VALUE_SETED);
         if(valueHandler==null){
             return;
         }
         valueHandler.removeCallbacksAndMessages(null);
-        valueHandler.postDelayed(new Runnable() {
+        valueHandler.post(new Runnable() {
             @Override
             public void run() {
-                changeStep=0;
+                int changeStep=0;
                 while(changeStep<dotsCount){
-                    setCurrentValue(targetValue);
+                    setCurrentValue(targetValue,changeStep);
                     drawHandler.sendEmptyMessage(VALUE_SETED);
                     try {
-//                        Thread.sleep(Math.min(SET_VALUE_ANIMATION_FRAMES_INTERVAL,setValueInterval==0?SET_VALUE_ANIMATION_FRAMES_INTERVAL:(setValueInterval/dotsCount)));
-                        Thread.sleep(SET_VALUE_ANIMATION_FRAMES_INTERVAL-SET_VALUE_ANIMATION_FRAMES_INTERVAL_STEP*changeStep);
+                        Thread.sleep(SET_VALUE_ANIMATION_FRAMES_INTERVAL-SET_VALUE_ANIMATION_FRAMES_INTERVAL_STEP*changeStep);//先涨先落的间隔越来越短
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     changeStep++;
                 }
             }
-        },Math.min(SET_VALUE_ANIMATION_FRAMES_INTERVAL,setValueInterval/dotsCount));
+        });
     }
 
     /**
@@ -529,16 +518,14 @@ public class VoiceAnimator extends ViewGroup {
             return;
         }
         valueHandler.removeCallbacksAndMessages(null);
-        valueHandler.postDelayed(new Runnable() {
+        valueHandler.post(new Runnable() {
             @Override
             public void run() {
-                changeStep=0;
+                int changeStep=0;
                 while(changeStep<dotsCount){
-                    setCurrentHeight(height);
+                    setCurrentHeight(height,changeStep);
                     drawHandler.sendEmptyMessage(VALUE_SETED);
-//                        sendEmptyMessageDelayed(VALUE_SETED,Math.min(SET_VALUE_ANIMATION_FRAMES_INTERVAL,setValueInterval==0?SET_VALUE_ANIMATION_FRAMES_INTERVAL:(setValueInterval/dotsCount)));
                     try {
-//                        Thread.sleep(Math.min(SET_VALUE_ANIMATION_FRAMES_INTERVAL,setValueInterval==0?SET_VALUE_ANIMATION_FRAMES_INTERVAL:(setValueInterval/dotsCount)));
                         Thread.sleep(SET_VALUE_ANIMATION_FRAMES_INTERVAL-SET_VALUE_ANIMATION_FRAMES_INTERVAL_STEP*changeStep);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -546,6 +533,28 @@ public class VoiceAnimator extends ViewGroup {
                     changeStep++;
                 }
             }
-        },SET_VALUE_ANIMATION_FRAMES_INTERVAL);
+        });
     }
+
+
+    /**
+     * 设置间隔时间，根据间隔时间，调整动画的效果
+     * ms<100时，不生效，因为会导致动画变形
+     * @param ms
+     */
+    public void setValueInterval(int ms){
+        if (ms<100){
+            return;
+        }
+        SET_VALUE_ANIMATION_FRAMES_INTERVAL = (int) (ms*0.4);
+        SET_VALUE_ANIMATION_FRAMES_INTERVAL_STEP = (int) (ms*0.05);
+
+        VoiceAnimationUnit.SET_VALUE_ANIMATION_MAX_FRAMES = ms/VoiceAnimationUnit.SET_VALUE_ANIMATION_FRAMES_INTERVAL;
+        VoiceAnimationUnit.RESET_VALUE_ANIMATION_MAX_FRAMES = (int) (ms/VoiceAnimationUnit.RESET_VALUE_ANIMATION_FRAMES_INTERVAL*1.3);
+//        VoiceAnimationUnit.LOADING_ANIMATION_MAX_FRAMES = ms/VoiceAnimationUnit.LOADING_ANIMATION_FRAMES_INTERVAL*3;
+        VoiceAnimationUnit.STAY_INTERVAL = (int) (ms/1.6);
+
+
+    }
+
 }

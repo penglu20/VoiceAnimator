@@ -10,13 +10,19 @@ A custom view that imitate google app's voice animation.
 
 ![startLoading()效果](https://raw.githubusercontent.com/l465659833/VoiceAnimation/master/art/startLoading.gif)
 
+
+# 实现原理简介
+
+[【造轮子系列】仿谷歌语音搜索动画——VoiceAnimation](http://www.siki.space/post/voice_animation_development.html)
+
+
 #How To Use
 
 add to your build.gradle files:
 
 ```
 dependencies {
-    compile 'com.pl:VoiceAnimator:0.1'
+    compile 'com.pl:VoiceAnimator:0.2'
 }
 ```
 
@@ -145,4 +151,5 @@ dotsColors 每个点的颜色，rgb颜色，推荐使用Color.parseColor("#ff000
  **启动加载动画**  
  
    height 加载动画的幅度，单位px
+
 

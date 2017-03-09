@@ -17,7 +17,7 @@ import android.view.animation.LinearInterpolator;
 /**
  * Created by penglu on 2016/5/27.
  */
-public class VoiceAnimationUnite extends View {
+public class VoiceAnimationUnit extends View {
     private String TAG="VoiceAnimationUnite";
 
     private static final int HEIGHT_CHANGING =10010;
@@ -25,16 +25,26 @@ public class VoiceAnimationUnite extends View {
     private static final int VALUE_RESETTING =10086;
     private static final int VALUE_CHANGING=10000;
 
-    private static final int SET_VALUE_ANIMATION_MAX_FRAMES=10;
-    private static final int SET_VALUE_ANIMATION_FRAMES_INTERVAL=10;
+    static final int DEFAULT_SET_VALUE_ANIMATION_MAX_FRAMES=10;
+    static final int SET_VALUE_ANIMATION_FRAMES_INTERVAL=10;
 
-    private static final int STAY_INTERVAL=50;
+    static final int DEFAULT_STAY_INTERVAL=50;
 
-    private static final int RESET_VALUE_ANIMATION_MAX_FRAMES=10;
-    private static final int RESET_VALUE_ANIMATION_FRAMES_INTERVAL=10;
+    static final int DEFAULT_RESET_VALUE_ANIMATION_MAX_FRAMES=10;
+    static final int RESET_VALUE_ANIMATION_FRAMES_INTERVAL=10;
 
-    private static final int LOADING_ANIMATION_MAX_FRAMES=30;
-    private static final int LOADING_ANIMATION_FRAMES_INTERVAL=15;
+    static final int DEFAULT_LOADING_ANIMATION_MAX_FRAMES=30;
+    static final int LOADING_ANIMATION_FRAMES_INTERVAL=15;
+
+
+
+    static int SET_VALUE_ANIMATION_MAX_FRAMES=  DEFAULT_SET_VALUE_ANIMATION_MAX_FRAMES;
+
+    static int STAY_INTERVAL=   DEFAULT_STAY_INTERVAL;
+
+    static int RESET_VALUE_ANIMATION_MAX_FRAMES=  DEFAULT_RESET_VALUE_ANIMATION_MAX_FRAMES;
+
+    static int LOADING_ANIMATION_MAX_FRAMES=  DEFAULT_LOADING_ANIMATION_MAX_FRAMES;
 
 
     float width;
@@ -61,7 +71,7 @@ public class VoiceAnimationUnite extends View {
     float currentY;
 
     private boolean isLoading;
-    public VoiceAnimationUnite(Context context) {
+    public VoiceAnimationUnit(Context context) {
         super(context);
     }
 
@@ -183,7 +193,7 @@ public class VoiceAnimationUnite extends View {
     }
 
     private void removeResetMessages() {
-        VoiceAnimationUnite.this.changeStep=0;
+        VoiceAnimationUnit.this.changeStep=0;
         drawHandler.removeMessages(VALUE_RESET_START);
         drawHandler.removeMessages(VALUE_RESETTING);
     }
@@ -194,7 +204,10 @@ public class VoiceAnimationUnite extends View {
         this.currentValue =value;
     }
 
-
+    /**
+     * 设置当前动画的幅度值
+     * @param targetValue 动画的幅度，范围（0,1）
+     */
     public void setValue(float targetValue){
         if (isLoading){
             return;
@@ -233,7 +246,7 @@ public class VoiceAnimationUnite extends View {
                     return;
                 }
                 final float lastValue=(Float.isInfinite(currentValue)||Float.isNaN(currentValue))?0:currentValue;
-                final float targetValue=VoiceAnimationUnite.this.targetValue;
+                final float targetValue= VoiceAnimationUnit.this.targetValue;
 
 //                Log.d(TAG,"Runnable start currentValue="+lastValue);
 //                Log.d(TAG,"Runnable start targetValue="+targetValue);
